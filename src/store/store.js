@@ -1,21 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import state from './state';
+import getters from './getters';
+import actions from './actions';
+import mutations from './mutation';
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-    state: {
-        pages: [
-            { 
-                id: 0,
-                pageElements: [],
-                isActive: true,
-                backgroundColor: '#fff'
-            }
-        ],
-        elements: []
-    },
-    getters: {
-        getPages: state => state.pages
-    }
+    state,
+    getters,
+    mutations,
+    actions
 });

@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div
+    
+    >
         <inline-svg
             :class="name"
-            :src="path"
             :alt="name"
+            :src="svg"
         />
         <span>{{ title }}</span>
     </div>
@@ -13,7 +15,7 @@
     import InlineSvg from 'vue-inline-svg';
 
     export default {
-        props: ['name', 'title', 'path'],
+        props: ['name', 'title', 'svg'],
         components: {
             InlineSvg
         }

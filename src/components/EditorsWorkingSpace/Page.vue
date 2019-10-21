@@ -5,7 +5,11 @@
             :key="page.id"
             class="editor-page"
         >
-            {{ page.isActive }}
+            <component
+                v-for="el in elements"
+                :key="el.id"
+                :is="el.type"
+            />
         </div>
     </div>
 </template>
@@ -15,6 +19,9 @@
         computed: {
             pages() {
                 return this.$store.getters.getPages;
+            },
+            elements() {
+                return this.$store.getters.getElements;
             }
         }
     }

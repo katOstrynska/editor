@@ -1,38 +1,40 @@
 <template>
     <div>
-        <panel-element
+        <div
             v-for="element in elements"
             :key="element.name"
             :name="element.name"
             :title="element.title"
-            :path="element.path"
             class="panel-element"
+            @click="(e) => {addElement(e, element)}"
         >
-        </panel-element>
+            <inline-svg
+                :class="element.name"
+                :alt="element.name"
+                :src="element.svg"
+            />
+            <span>{{ element.title }}</span>
+        </div>
     </div>
 </template>
 
 <script>
-    import PanelElement from './PanelElement.vue';
-
-    import imageCell from '@/assets/icons/panel-icons/image-cell.svg';
-    import image from '@/assets/icons/panel-icons/image.svg';
-    import text from '@/assets/icons/panel-icons/text.svg';
-    import elements from '@/assets/icons/panel-icons/elements.svg';
+    import element from '../../mixins/elements';
+    import InlineSvg from 'vue-inline-svg';
 
     export default {
-        data() {
-            return {
-                elements: [
-                    { name: 'image-cell', path: imageCell, title: 'Image Cell' },
-                    { name: 'image', path: image, title: 'Image' },
-                    { name: 'text', path: text, title: 'Text' },
-                    { name: 'elements', path: elements, title: 'Elements' }
-                ]
+        methods: {
+            addElement(e, element) {
+                this.$store.dispatch('ADD_ELEMENT', element)
             }
         },
+        computed: {
+            elements() {
+                return element.getElements();
+            },
+        },
         components: {
-            panelElement: PanelElement
+            InlineSvg
         }
     }
 </script>
@@ -43,5 +45,6 @@
         margin: 10px auto;
         display: flex;
         align-items: center;
+        cursor: pointer;
     }
 </style>
