@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <div
             v-for="element in elements"
             :key="element.name"
@@ -8,6 +9,7 @@
             class="panel-element"
             @click="(e) => {addElement(e, element)}"
         >
+            <input type="file" id="imageInput" @change="(e) => {onFileChange(e, element)}" style="display: none;">
             <inline-svg
                 :class="element.name"
                 :alt="element.name"
@@ -25,7 +27,17 @@
     export default {
         methods: {
             addElement(e, element) {
-                this.$store.dispatch('ADD_ELEMENT', element)
+                if (element.settings.imageUpload) {
+                    document.getElementById("imageInput").click();
+                } else {
+                    this.$store.dispatch('ADD_ELEMENT', element)
+                }
+            },
+            onFileChange (e, element) {
+                const file = e.target.files[0];
+                this.url = URL.createObjectURL(file);
+                element.settings.image = this.url;
+                this.$store.dispatch('ADD_ELEMENT', element);
             }
         },
         computed: {

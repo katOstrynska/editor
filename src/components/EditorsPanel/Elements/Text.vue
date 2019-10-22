@@ -2,7 +2,7 @@
     <div
         class="k2p-text"
     >
-        
+        <p>Text element</p>
     </div>
 </template>
 

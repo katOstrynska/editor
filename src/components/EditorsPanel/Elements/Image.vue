@@ -2,7 +2,7 @@
     <div
         class="k2p-image"
     >
-        <img :src="val.url" />
+        <img :src="image" style="width: 200px;"/>
     </div>
 </template>
 
@@ -16,12 +16,12 @@
         svg: image,
         settings: {
             type: EL_TYPE,
+            imageUpload: true,
             draggable: true,
             resizable: true,
             top: 0,
             left: 0
         },
-        props: ['val']
-
+        props: ['image']
     }
 </script>

@@ -2,6 +2,7 @@
     <div class="k2p-editor">
         <editor-panel class="panel"></editor-panel>
         <editor-pages class="workspace"></editor-pages>
+        
     </div>
 </template>
 
