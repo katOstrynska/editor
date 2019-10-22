@@ -1,18 +1,25 @@
 <template>
   <div id="app">
-    <editor></editor>
+    <panel></panel>
+    <scene></scene>
   </div>
 </template>
 
 <script>
-  import Editor from '@/components/Editor/Editor.vue';
+  import Panel from '@/components/Panel/index.vue';
+  import Scene from '@/components/Scene/index.vue';
+
   export default {
     components: {
-      editor: Editor
+      Panel,
+      Scene
     }
   }
 </script>
 
 <style>
-
+  #app {
+    height: 100%;
+    display: flex;
+  }
 </style>

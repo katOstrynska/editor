@@ -1,7 +1,7 @@
-import ImageEl from '../components/EditorsPanel/Elements/Image.vue';
-import TextEl from '../components/EditorsPanel/Elements/Text.vue';
+import editorImageElement from '../components/Panel/Elements/Image.vue';
+import editorTextElement from '../components/Panel/Elements/Text.vue';
 
-let elements = [ImageEl, TextEl];
+let elements = [editorImageElement, editorTextElement];
 
 export default {
     getElements() {

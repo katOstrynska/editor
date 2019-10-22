@@ -1,12 +1,11 @@
 <template>
-    <div>
-        
+    <div class="editorPanel">
         <div
             v-for="element in elements"
             :key="element.name"
             :name="element.name"
             :title="element.title"
-            class="panel-element"
+            class="editorPanel__element"
             @click="(e) => {addElement(e, element)}"
         >
             <input type="file" id="imageInput" @change="(e) => {onFileChange(e, element)}" style="display: none;">
@@ -52,11 +51,18 @@
 </script>
 
 <style lang="scss" scoped>
-    .panel-element {
-        width: 40%;
+    .editorPanel {
+        width: 30%;
+    }
+    .editorPanel__element {
+        width: 200px;
+        padding: 15px;
         margin: 10px auto;
-        display: flex;
-        align-items: center;
+        border: 1px solid #333;
         cursor: pointer;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        font-size: 24px;
     }
 </style>

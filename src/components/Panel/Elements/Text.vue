@@ -1,6 +1,6 @@
 <template>
     <div
-        class="k2p-text"
+        class="editorTextElement"
     >
         <p>Text element</p>
     </div>
@@ -8,7 +8,7 @@
 
 <script>
     import text from '@/assets/icons/panel-icons/text.svg';
-    const EL_TYPE = 'k2p-text'
+    const EL_TYPE = 'editorTextElement'
 
     export default {
         name: EL_TYPE,
@@ -20,8 +20,6 @@
             resizable: true,
             top: 0,
             left: 0
-        },
-        props: ['val']
-
+        }
     }
 </script>

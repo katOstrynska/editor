@@ -1,6 +1,6 @@
 <template>
     <div
-        class="k2p-image"
+        class="editorImageElement"
     >
         <img :src="image" style="width: 200px;"/>
     </div>
@@ -8,7 +8,7 @@
 
 <script>
     import image from '@/assets/icons/panel-icons/image.svg';
-    const EL_TYPE = 'k2p-image'
+    const EL_TYPE = 'editorImageElement'
 
     export default {
         name: EL_TYPE,
