@@ -1,8 +1,10 @@
 <template>
     <div
         class="editorImageElement"
+        :id="el.id"
+        :width="el.width"
     >
-        <img :src="image" style="width: 200px;"/>
+        <img :src="image"/>
     </div>
 </template>
 
@@ -22,6 +24,10 @@
             top: 0,
             left: 0
         },
-        props: ['image']
+        props: ['el', 'image'],
     }
 </script>
+
+<style scoped>
+    
+</style>

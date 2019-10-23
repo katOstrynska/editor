@@ -1,6 +1,7 @@
 <template>
     <div
         class="editorTextElement"
+        :id="el.id"
     >
         <p>Text element</p>
     </div>
@@ -20,6 +21,13 @@
             resizable: true,
             top: 0,
             left: 0
-        }
+        },
+        props: ['el']
     }
 </script>
+
+<style scoped>
+    .editorElement {
+        position:relative;
+    }
+</style>

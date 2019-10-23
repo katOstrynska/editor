@@ -20,6 +20,7 @@
 </template>
 
 <script>
+    import { uuid } from 'vue-uuid';
     import element from '../../mixins/elements';
     import InlineSvg from 'vue-inline-svg';
 
@@ -29,14 +30,29 @@
                 if (element.settings.imageUpload) {
                     document.getElementById("imageInput").click();
                 } else {
+                    element.settings.id = uuid.v1();
                     this.$store.dispatch('ADD_ELEMENT', element)
                 }
             },
-            onFileChange (e, element) {
+            onFileChange (e, element, callback) {
                 const file = e.target.files[0];
+                let width, height;
+                let arr = [];
+                let img = new Image();
+                img.onload = function() {
+                    width = img.naturalWidth;
+                    height = img.naturalHeight;
+                    arr.push(width);
+                }
+                img.src = URL.createObjectURL(file);
+                console.log(arr[0]);
+
+
                 this.url = URL.createObjectURL(file);
                 element.settings.image = this.url;
+                element.settings.id = uuid.v1();
                 this.$store.dispatch('ADD_ELEMENT', element);
+                document.querySelector('#imageInput').value = '';
             }
         },
         computed: {

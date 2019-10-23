@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
+import UUID from 'vue-uuid'
+
+Vue.use(UUID);
+
 
 import { store } from './store/store';
 

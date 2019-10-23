@@ -1,12 +1,11 @@
 <template>
     <div class="editorScene">
         <div class="editorScene__workspace">
-            <div>
-                <component
-                    v-for="el in elements"
-                    :key="el.id"
-                    :is="el.type"
-                    :image="el.image"
+            <div class="editorScene__workspace-page" id="movableScene">
+                <DefaultComponent
+                    v-for="(el, index) in elements"
+                    :key="index"
+                    :el="el"
                 />
             </div>
         </div>
@@ -14,8 +13,7 @@
 </template>
 
 <script>
-    import editorImageElement from '../Panel/Elements/Image';
-    import editorTextElement from '../Panel/Elements/Text';
+    import DefaultComponent from './Component.vue';
 
     export default {
         computed: {
@@ -24,8 +22,7 @@
             }
         },
         components: {
-            editorImageElement,
-            editorTextElement
+            DefaultComponent
         }
     }
 </script>
@@ -42,5 +39,14 @@
         height: 80%;
         margin: auto;
         background-color: white;
+    }
+    .editorScene__workspace > div {
+        height: 100%;
+    }
+    .editorScene__workspace-page {
+        position: relative;
+    } 
+    .moveable {
+        position: absolute;
     }
 </style>
