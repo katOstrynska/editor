@@ -34,25 +34,31 @@
                     this.$store.dispatch('ADD_ELEMENT', element)
                 }
             },
-            onFileChange (e, element, callback) {
+            onFileChange (e, element) {
                 const file = e.target.files[0];
-                let width, height;
-                let arr = [];
-                let img = new Image();
-                img.onload = function() {
-                    width = img.naturalWidth;
-                    height = img.naturalHeight;
-                    arr.push(width);
-                }
-                img.src = URL.createObjectURL(file);
-                console.log(arr[0]);
-
 
                 this.url = URL.createObjectURL(file);
-                element.settings.image = this.url;
-                element.settings.id = uuid.v1();
-                this.$store.dispatch('ADD_ELEMENT', element);
-                document.querySelector('#imageInput').value = '';
+
+                function loadImage(url) {
+                    return new Promise((resolve, reject) => {
+                    let img = new Image();
+                    img.addEventListener('load', e => resolve(img));
+                    img.addEventListener('error', () => {
+                        reject(new Error(`Failed to load image's URL: ${url}`));
+                    });
+                    img.src = url;
+                    });
+                }
+
+                loadImage(URL.createObjectURL(file))
+                    .then(img => {
+                        element.settings.width = img.naturalWidth;
+                        element.settings.height = img.naturalHeight;
+                        element.settings.image = this.url;
+                        element.settings.id = uuid.v1();
+                        this.$store.dispatch('ADD_ELEMENT', element);
+                        document.querySelector('#imageInput').value = '';
+                    })                
             }
         },
         computed: {
