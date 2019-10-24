@@ -52,10 +52,11 @@
 
                 loadImage(URL.createObjectURL(file))
                     .then(img => {
+                        element.settings.id = uuid.v1();
                         element.settings.width = img.naturalWidth;
                         element.settings.height = img.naturalHeight;
                         element.settings.image = this.url;
-                        element.settings.id = uuid.v1();
+                        element.settings.moveableUniqueClass = `moveable-${element.settings.id}`;
                         this.$store.dispatch('ADD_ELEMENT', element);
                         document.querySelector('#imageInput').value = '';
                     })                

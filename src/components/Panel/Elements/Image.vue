@@ -2,7 +2,6 @@
     <div
         class="editorImageElement"
         :id="el.id"
-        :width="el.width"
     >
         <img :src="image"/>
     </div>
@@ -29,5 +28,7 @@
 </script>
 
 <style scoped>
-    
+    img {
+        display: block;
+    }
 </style>

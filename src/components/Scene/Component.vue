@@ -1,9 +1,12 @@
 <template>
     <Moveable
         class="moveable target"
+        :class="el.moveableUniqueClass"
         v-bind="moveable"
+        :style="`width:${el.width}px; height:${el.height}px;`"
         @drag="handleDrag"
         @scale="handleScale"
+        ref="moveable"
     >
         <component
             :is="el.type"
@@ -41,6 +44,9 @@
                 target.style.transform = transform;
             }
         },
+        mounted() {
+      console.log(this.$refs.moveable.moveable.innerMoveable.base);
+    },
         components: {
             Moveable,
             editorImageElement,
@@ -53,8 +59,5 @@
 <style scoped>
     .moveable {
         position: absolute;
-        /* width: 300px; */
-        width: 258px;
-        height: 199px;
     }
 </style>
