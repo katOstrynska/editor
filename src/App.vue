@@ -17,7 +17,9 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  @import "styles/global.scss";
+
   #app {
     height: 100%;
     display: flex;

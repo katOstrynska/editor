@@ -8,7 +8,7 @@
             class="editorPanel__element"
             @click="(e) => {addElement(e, element)}"
         >
-            <input type="file" id="imageInput" @change="(e) => {onFileChange(e, element)}" style="display: none;">
+            <input type="file" id="imageInput" multiple="multiple" @change="(e) => {onFileChange(e, element)}" style="display: none;">
             <inline-svg
                 :class="element.name"
                 :alt="element.name"
@@ -35,9 +35,10 @@
                 }
             },
             onFileChange (e, element) {
-                const file = e.target.files[0];
+                const file = e.target.files[0]; // only first one from multiple uploads!!
 
                 this.url = URL.createObjectURL(file);
+                
 
                 function loadImage(url) {
                     return new Promise((resolve, reject) => {

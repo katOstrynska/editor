@@ -14,5 +14,12 @@ module.exports = {
             .use("vue-svg-inline-loader")
                 .loader("vue-svg-inline-loader")
                 .options({ /* ... */ });
+    },
+    pluginOptions: {
+        "style-resources-loader": {
+          preProcessor: "scss",
+          patterns: [path.resolve(__dirname, "./src/styles/global.scss")]
+        }
     }
 }
+

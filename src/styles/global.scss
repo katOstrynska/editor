@@ -1,0 +1,10 @@
+@import "./setup/variables.scss";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=latin-ext');
+
+#app {
+    color: $base-color;
+    font-family: 'Roboto', sans-serif;
+}
+.moveable-control-box {
+    display: none!important;
+}
