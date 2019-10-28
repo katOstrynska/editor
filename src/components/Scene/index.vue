@@ -1,6 +1,6 @@
 <template>
     <div class="editorScene"
-        v-outside="outside"
+        v-outside
     >
         <div class="editorScene__workspace">
             <div
@@ -75,6 +75,7 @@
     }
     .editorScene__workspace-page {
         position: relative;
+        overflow: unset;
     } 
     .moveable {
         position: absolute;
