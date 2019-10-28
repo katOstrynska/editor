@@ -41,9 +41,35 @@
             }
         },
         methods: {
+            handleActiveClass() {
+                const moveableElement = this.$refs.moveable.$el;
+                const moveableBoxElement = this.$refs.moveable.moveable.innerMoveable;
+                const allMovableElements = moveableBoxElement.props.container.children;
+                const allMovableElementsArr = Array.from(allMovableElements);
+
+                allMovableElementsArr.map(item => {
+                    if (item.matches('.moveable-control-box.active-box')) {
+                        item.classList.remove('active-box');
+                    }
+                    if (item.matches('.moveable.active')) {
+                        item.classList.remove('active');
+                    }
+                })
+
+                moveableElement.classList.add('active');
+                moveableBoxElement.base.classList.add('active-box');
+
+                allMovableElementsArr.map(item => {
+                    if (item.matches('.moveable-control-box')) {
+                        item.style.display = "none";
+                    }
+                    if (item.matches('.moveable-control-box.active-box')) {
+                        item.style.display = "block";
+                    }
+                }) 
+            },
             handleClick() {
-                console.log(this);
-                
+                this.handleActiveClass();
             },
             handleDrag({ target, transform }) {
                 // console.log('onDrag left, top', transform);
@@ -60,37 +86,10 @@
             handleRotate({ target, dist, transform }) {
                 // console.log('onRotate', dist);
                 target.style.transform = transform;
-            },
+            }
         },
         mounted() {
-            const moveableElement = this.$refs.moveable.$el;
-
-            const moveableBoxElement = this.$refs.moveable.moveable.innerMoveable;
-
-            const allMovableElements = moveableBoxElement.props.container.children;
-
-            const allMovableElementsArr = Array.from(allMovableElements);
-
-            allMovableElementsArr.map(item => {
-                if (item.matches('.moveable-control-box.active-box')) {
-                    item.classList.remove('active-box');
-                }
-                if (item.matches('.moveable.active')) {
-                    item.classList.remove('active');
-                }
-            })
-
-            moveableElement.classList.add('active');
-            moveableBoxElement.base.classList.add('active-box');
-
-            allMovableElementsArr.map(item => {
-                if (item.matches('.moveable-control-box')) {
-                    item.style.display = "none";
-                }
-                if (item.matches('.moveable-control-box.active-box')) {
-                    item.style.display = "block";
-                }
-            })
+            this.handleActiveClass();
         },
         updated() {
             
