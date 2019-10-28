@@ -41,54 +41,40 @@
             }
         },
         methods: {
+            handleActiveDrag() {
+                this.$parent.$children.map(child => {
+                    child.moveable.draggable = false;
+                });
+                this.moveable.draggable = true;
+            },
             handleActiveClass() {
-                const moveableElement = this.$refs.moveable.$el;
-                const moveableBoxElement = this.$refs.moveable.moveable.innerMoveable;
-                const allMovableElements = moveableBoxElement.props.container.children;
-                const allMovableElementsArr = Array.from(allMovableElements);
-
-                allMovableElementsArr.map(item => {
-                    if (item.matches('.moveable-control-box.active-box')) {
-                        item.classList.remove('active-box');
-                    }
-                    if (item.matches('.moveable.active')) {
-                        item.classList.remove('active');
-                    }
-                })
-
-                moveableElement.classList.add('active');
-                moveableBoxElement.base.classList.add('active-box');
-
-                allMovableElementsArr.map(item => {
-                    if (item.matches('.moveable-control-box')) {
-                        item.style.display = "none";
-                    }
-                    if (item.matches('.moveable-control-box.active-box')) {
-                        item.style.display = "block";
-                    }
-                }) 
+                this.$parent.$children.map(child => {
+                    child.$el.classList.remove('active'); //remove active class from elements that are not edited at the moment
+                    child.$refs.moveable.moveable.innerMoveable.base.style.display = "none"; //remove blue control box from elements that are not edited at the moment
+                });
+                this.$el.classList.add('active'); //add active class to element that is edited at the moment
+                this.$refs.moveable.moveable.innerMoveable.base.style.display = "block"; //add blue control box to element that is edited at the moment
             },
             handleClick() {
+                this.handleActiveDrag();
                 this.handleActiveClass();
             },
             handleDrag({ target, transform }) {
-                // console.log('onDrag left, top', transform);
                 target.style.transform = transform;
             },
-            handleDragEnd ({ target }) {
-                let moveableBox = this.$refs.moveable.moveable.innerMoveable.base;
-                moveableBox.classList.add('treter');
+            handleDragEnd() {
+                console.log(this.activeEl);
+                this.activeEl = false;
             },
             handleScale({ target, transform, scale }) {
-                // console.log('onScale scale', scale);
                 target.style.transform = transform;
             },
             handleRotate({ target, dist, transform }) {
-                // console.log('onRotate', dist);
                 target.style.transform = transform;
             }
         },
         mounted() {
+            this.handleActiveDrag();
             this.handleActiveClass();
         },
         updated() {
