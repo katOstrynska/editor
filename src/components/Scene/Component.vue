@@ -1,4 +1,6 @@
-<template>
+<template
+    v-if="moveable"
+>
     <Moveable
         class="moveable target"
         :class="el.moveableUniqueClass"
@@ -6,7 +8,6 @@
         :style="`width:${el.width}px; height:${el.height}px;`"
         @click.native="handleClick"
         @drag="handleDrag"
-        @dragEnd="handleDragEnd"
         @scale="handleScale"
         @rotate="handleRotate"
         ref="moveable"
@@ -50,7 +51,9 @@
             handleActiveClass() {
                 this.$parent.$children.map(child => {
                     child.$el.classList.remove('active'); //remove active class from elements that are not edited at the moment
-                    child.$refs.moveable.moveable.innerMoveable.base.style.display = "none"; //remove blue control box from elements that are not edited at the moment
+                    if (child.$refs.moveable.moveable !== undefined) {
+                        child.$refs.moveable.moveable.innerMoveable.base.style.display = "none"; //remove blue control box from elements that are not edited at the moment
+                    }                    
                 });
                 this.$el.classList.add('active'); //add active class to element that is edited at the moment
                 this.$refs.moveable.moveable.innerMoveable.base.style.display = "block"; //add blue control box to element that is edited at the moment
@@ -61,10 +64,6 @@
             },
             handleDrag({ target, transform }) {
                 target.style.transform = transform;
-            },
-            handleDragEnd() {
-                console.log(this.activeEl);
-                this.activeEl = false;
             },
             handleScale({ target, transform, scale }) {
                 target.style.transform = transform;
@@ -98,8 +97,5 @@
     .moveable.active,
     .moveable:hover {
         filter: grayscale(0);
-    }
-    .moveable-control-box.active-box > div {
-        background: red;
     }
 </style>
